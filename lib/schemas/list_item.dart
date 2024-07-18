@@ -1,3 +1,4 @@
+import 'package:schema_org/schemas/product.dart';
 import 'package:schema_org/src/schema_serializable.dart';
 import 'package:schema_org/src/utils.dart';
 import 'package:schema_org/schemas/thing.dart';
@@ -13,7 +14,7 @@ import 'package:schema_org/schemas/event.dart';
 class SchemaListItem implements SchemaSerializable {
   /// An entity represented by an entry in a list or data feed (e.g. an
   /// 'artist' in a list of 'artists').
-  SchemaThing? item;
+  dynamic item;
 
   /// A link to the ListItem that follows the current one.
   SchemaListItem? nextItem;
@@ -112,7 +113,7 @@ class SchemaListItem implements SchemaSerializable {
   Map<String, dynamic> toJsonLd() => removeEmpty({
         '@context': 'https://schema.org',
         '@type': 'ListItem',
-        'item': convertToJsonLd(item, [SchemaThing]),
+        'item': convertToJsonLd(item, [SchemaThing, SchemaProduct]),
         'nextItem': convertToJsonLd(nextItem, [SchemaListItem]),
         'position': convertToJsonLd(position, [String, int]),
         'previousItem': convertToJsonLd(previousItem, [SchemaListItem]),

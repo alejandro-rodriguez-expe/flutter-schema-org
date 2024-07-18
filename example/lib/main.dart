@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:schema_org/schema_org.dart';
 import 'package:schema_org/schemas/list_item.dart';
 import 'package:schema_org/schemas/item_list.dart';
+import 'package:schema_org/schemas/product.dart';
 import 'package:schema_org/schemas/thing.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final a = [SchemaListItem(
      position: 1,
-    item: SchemaThing(
+    item: SchemaProduct(
       name: 'producto 1'
     )
   )];
