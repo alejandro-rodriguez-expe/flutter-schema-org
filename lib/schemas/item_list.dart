@@ -1,3 +1,4 @@
+import 'package:schema_org/schemas/product.dart';
 import 'package:schema_org/src/schema_serializable.dart';
 import 'package:schema_org/src/utils.dart';
 import 'package:schema_org/schemas/list_item.dart';
@@ -20,7 +21,7 @@ class SchemaItemList implements SchemaSerializable {
   /// cases.
   ///
   /// Supported types: [SchemaListItem], [String], [SchemaThing]
-  dynamic itemListElement;
+  List<SchemaListItem> itemListElement;
 
   /// Type of ordering (e.g. Ascending, Descending, Unordered).
   ///
@@ -95,7 +96,7 @@ class SchemaItemList implements SchemaSerializable {
 
   /// Create a new instance of [SchemaItemList]
   SchemaItemList({
-    this.itemListElement,
+    this.itemListElement = const <SchemaListItem>[],
     this.itemListOrder,
     this.numberOfItems,
     this.additionalType,
@@ -117,8 +118,8 @@ class SchemaItemList implements SchemaSerializable {
   Map<String, dynamic> toJsonLd() => removeEmpty({
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        'itemListElement': convertToJsonLd(
-            itemListElement, [SchemaListItem, String, SchemaThing]),
+        'itemListElement': itemListElement.map((e) => convertToJsonLd(
+            e, [SchemaListItem, String, SchemaThing, SchemaProduct])).toList(),
         'itemListOrder':
             convertToJsonLd(itemListOrder, [SchemaItemListOrderType, String]),
         'numberOfItems': convertToJsonLd(numberOfItems, [int]),

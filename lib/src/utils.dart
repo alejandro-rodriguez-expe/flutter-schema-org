@@ -25,7 +25,8 @@ dynamic convertToJsonLd(dynamic val, [List<Type> types = const []]) {
   // object is one of the expected types.
   for (Type type in types) {
     if (val.runtimeType == type) {
-      return val.toJson();
+
+      return val.toJsonLd();
     }
   }
 

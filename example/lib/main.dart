@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:schema_org/schema_org.dart';
-import 'package:schema_org/schemas/organization.dart';
-import 'package:schema_org/schemas/product.dart';
+import 'package:schema_org/schemas/list_item.dart';
+import 'package:schema_org/schemas/item_list.dart';
+import 'package:schema_org/schemas/thing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,26 +16,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final a = [SchemaListItem(
+     position: 1,
+    item: SchemaThing(
+      name: 'producto 1'
+    )
+  )];
   @override
   void initState() {
     super.initState();
-    SchemaOrg.writeJsonLd(
-        SchemaOrganization(
-          name: 'Oddbit',
-          url: 'https://oddbit.id',
-          logo: 'https://avatars.githubusercontent.com/u/1946799?s=200&v=4',
-        ),
-        name: 'Oddbit');
+
 
     SchemaOrg.writeJsonLd(
-        SchemaProduct(
-          name: 'Primer producto',
-          url: 'https://oddbit.id',
-          logo: 'https://avatars.githubusercontent.com/u/1946799?s=200&v=4',
-          sku: '123456',
-          image: 'https://avatars.githubusercontent.com/u/1946799?s=200&v=4'
-        ),
-        name: 'Primer producto');
+      SchemaItemList(
+        url:'https://products.id',
+        numberOfItems: 10,
+        itemListElement:  a.map((e) => e).toList(),
+      ),
+        name: 'Primer producto',);
   }
 
   @override
